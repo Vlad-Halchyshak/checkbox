@@ -1,17 +1,9 @@
-import { useState } from "react"
+import { useState } from 'react'
 
-
-
-export const Checkbox = ({ state, handleChange, selected, setSelected}) => {
-  
-  console.log(selected)
-  
+export const Checkbox = ({ onChange }) => {
   return (
     <div>
-      <input type="checkbox"
-        check={selected}
-        onChange={() => setSelected(!selected)}   />
-      
+      <input type="checkbox" onChange={onChange} />
     </div>
   )
 }

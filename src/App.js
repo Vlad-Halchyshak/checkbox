@@ -7,44 +7,43 @@ import {Checkbox} from './comp/checkbox'
 function App() {
 
   const [firstState, setFirstState] = useState([
-    { id: 1, text: 'first text',  active: false },
-    { id: 2, text: 'second text', active: false },
-    { id: 3, text: 'third text',  active: false },
+    { id: 1, text: 'first text',  checked: false },
+    { id: 2, text: 'second text', checked: false },
+    { id: 3, text: 'third text',  checked: false },
   ])
-  const [select, setSelect] = useState(false)
   
-
-   const deleteSelected = () => {
-     //здесь делаешь Filter    
-     const list = firstState.filter(checkbox => checkbox.checked !== true)
-  }
-
-  const handleClick = checkbox => {
-//здесь поменять галочку на противоположное значение
-    checkbox.checked = !checked {
-      setList(...list, checkbox)
+    const removeSelected = () => {
+      const filteredList = firstState.filter((i) => i.active !== true)
+      setFirstState(filteredList)
     }
-  }
-        
-    
-   
+
+    const handleCheckboxClick = (checkbox) => {
+      const updatedList = firstState.map((item) => {
+        if (item.id === checkbox.id) {
+          return { ...item, active: !item.active }
+        }
+        return item
+      })
+      setFirstState(updatedList)
+    }
+   console.log(handleCheckboxClick)
   
   return (
     <div>
       {firstState.map((i) => (
         <ul key={i.id}>
           <li>
-            <Checkbox 
-              state={firstState}
-              
-              setSelected={setSelect}/>
+            <Checkbox
+              checked={i.active === true}
+              onChange={() => handleCheckboxClick(i)}
+              />
             {i.text}
           </li>
         </ul>
       ))}
-      <button
-        onClick={removeSelected }
-        style={{ margin: 30 }}>delete selected</button>
+      <button onClick={removeSelected} style={{ margin: 30 }}>
+        delete selected
+      </button>
     </div>
   )
 }
